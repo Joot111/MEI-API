@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <!--permissions for INTERNET access-->
+    <!-- permissions for INTERNET access -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- poderá ser necessário, também
-     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    -->
 
     <application
         android:allowBackup="true"
@@ -18,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.API">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
