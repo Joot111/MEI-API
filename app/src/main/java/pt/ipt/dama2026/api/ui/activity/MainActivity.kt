@@ -2,6 +2,7 @@ package pt.ipt.dama2026.api.ui.activity
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,6 +16,8 @@ import pt.ipt.dama2026.api.ui.adapter.NoteListAdapter
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
+import java.util.GregorianCalendar
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,6 +36,56 @@ class MainActivity : AppCompatActivity() {
 
         //listar notas
         listarNotas()
+
+        // adicionar uma nota
+        binding.btNewNote.setOnClickListener { addNewNote() }
+    }
+
+    /**
+     * Adicionar uma nova nota aleatória
+     * Avisa a BD da adição de uma nova nota, através da API
+     */
+    fun addNewNote() {
+        // import java.util.GregorianCalendar
+        // import kotlin.random.Random
+        val i = Random(GregorianCalendar.getInstance().timeInMillis).nextInt(100)
+        val note = Note("Nota " + i, "Descrição da Nota $i")
+
+        // invoca a adição de uma nova nota
+        addNote(note) {
+            Toast.makeText(this, "Adicionada " + it?.description, Toast.LENGTH_LONG).show()
+            listarNotas()
+        }
+    }
+
+    /**
+     * function that really add the new note to the API
+     */
+    private fun addNote(note: Note, onResult: (Note?) -> Unit) {
+
+        val call = RetrofitInitializer().noteService().addNote(note)
+        call.enqueue(
+            object : Callback<Note> {
+                /**
+                 * Invoked for a received HTTP response.
+                 * Note: An HTTP response may still indicate an application-level failure such as a 404 or 500.
+                 * Call [Response.isSuccessful] to determine if the response indicates success.
+                 */
+                override fun onResponse(call: Call<Note>, response: Response<Note>) {
+                    val addedNote = response.body()
+                    onResult(addedNote)
+                }
+
+                /**
+                 * Invoked when a network exception occurred talking to the server or when an unexpected exception
+                 * occurred creating the request or processing the response.
+                 */
+                override fun onFailure(call: Call<Note>, t: Throwable) {
+                    t.printStackTrace()
+                    onResult(null)
+                }
+            }
+        )
     }
 
     /**

@@ -10,5 +10,5 @@ data class Note(
     @SerializedName(value = "description") val description: String)
 
 /* @SerializedName("title") -- lê o atributo vindo do JSON
- * title: String -- nome da variável que irá receber o valor do atributo
+ * var title: String -- nome da variável que irá receber o valor do atributo
  */

@@ -21,6 +21,8 @@ class RetrofitInitializer {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 
-    // recebe os dados da API, para eles possam fazer alguma coisa
+    /*
+    * recebe os dados da API, para eles possam fazer alguma coisa
+    */
     fun noteService(): NoteService = retrofit.create(NoteService::class.java)
 }

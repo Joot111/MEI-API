@@ -2,7 +2,9 @@ package pt.ipt.dama2026.api.retrofit.service
 
 import pt.ipt.dama2026.api.model.Note
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 /**
  * descreve as ações que podem ser executadas com a API
@@ -15,4 +17,12 @@ interface NoteService {
      */
     @GET("api/notes")
     fun getNotes(): Call<List<Note>>
+
+    /**
+     * 'function' to add a note to API
+     *
+     * @param note
+     */
+    @POST("api/notes")
+    fun addNote(@Body note:Note):Call<Note>
 }

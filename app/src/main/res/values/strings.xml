@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">API</string>
     <string name="titulo_interface">Notas</string>
+    <string name="bt_label">Nova Nota</string>
 </resources>

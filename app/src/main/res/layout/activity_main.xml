@@ -15,6 +15,14 @@
         android:textSize="25sp"
         android:textStyle="bold" />
 
+    <!-- gerador aleatório de novas Notas -->
+    <Button
+        android:id="@+id/bt_new_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/bt_label"/>
+
     <!-- este 'contentor' vai receber os cartões lidos da API -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/nodeList"
